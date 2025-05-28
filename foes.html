@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuaderno de Combate - Configuración del combate</title>
+    <link rel="stylesheet" href="foes.css">
+</head>
+<body>
+    <header>
+        <h1>Cuaderno de Combate para DM de DND</h1>
+        <p>Configuración del combate:</p>
+    </header>
+
+        <section id="aliados">
+             <div id="camposAliados"></div>
+   
+    </section>
+    
+    <section id="configuracion">
+        <label for="numEnemigos">Número de enemigos:</label>
+        <input type="number" id="numEnemigos" min="1" max="10" placeholder="1-10">
+        <button id="generarCampos">Generar enemigos</button>
+    </section>
+
+    <section id="enemigos">
+        <h2>Datos de los enemigos</h2>
+        <form id="formEnemigos">
+            <div id="camposEnemigos"></div>
+            <button type="button" id="continuar" style="display:none;">Ir al combate</button>
+        </form>
+    </section>
+    <script src="foes.js"></script>
+
+</body>
+</html>

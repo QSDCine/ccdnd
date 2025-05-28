@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuaderno de Combate para DM de DND</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Cuaderno de Combate para DM de DND</h1>
+        <p>Añade a los jugadores:</p>
+    </header>
+
+    <section id="configuracion">
+        <label for="numJugadores">Número de jugadores:</label>
+        <input type="number" id="numJugadores" min="1" max="10" placeholder="1-10">
+        <button id="generarCampos">Añadir</button>
+    </section>
+
+    <section id="jugadores">
+        <h2>Datos de los jugadores</h2>
+        <form id="formJugadores">
+            <div id="camposJugadores"></div>
+            <button type="button" id="continuar" style="display:none;">Continuar</button>
+        </form>
+    </section>
+<script src="index.js"></script>
+</body>
+</html>
