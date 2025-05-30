@@ -153,6 +153,8 @@ botonCambiarCa.addEventListener("click", () => {
     combatientes[combatienteSeleccionado].ca = nuevaCa;
     resultadoAccion.textContent = `${combatientes[combatienteSeleccionado].nombre}: CA actualizada a ${nuevaCa}`;
     renderCombatientes();
+    valorCaEl.value = ""; // Vacía el input tras actualizar la CA
+
   } else {
     resultadoAccion.textContent = "Introduce un número válido para la CA.";
   }
