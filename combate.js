@@ -31,25 +31,25 @@ function renderCombatientes() {
     const div = document.createElement("div");
     div.classList.add("combatiente");
     if (index === indiceActual) div.classList.add("activo");
-if (index === combatienteSeleccionado) div.classList.add("seleccionado");
+    if (index === combatienteSeleccionado) div.classList.add("seleccionado");
 
+    const caMostrada = (c.ca !== undefined && c.ca !== null) ? c.ca : "-";
 
-div.innerHTML = `
-  <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">${index + 1}.– ${c.nombre}</strong><br>
-  PG: ${c.pgActual} / ${c.pgMaximos}
-`;
+    div.innerHTML = `
+      <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">${index + 1}.– ${c.nombre}</strong><br>
+      PG: ${c.pgActual} / ${c.pgMaximos} | CA: ${caMostrada}
+    `;
 
-
-  div.addEventListener("click", () => {
-  combatienteSeleccionado = index;
-  resultadoAccion.textContent = `Seleccionado: ${combatientes[index].nombre}`;
-  renderCombatientes(); // vuelve a pintar todos y actualiza el resaltado
-});
-
+    div.addEventListener("click", () => {
+      combatienteSeleccionado = index;
+      resultadoAccion.textContent = `Seleccionado: ${combatientes[index].nombre}`;
+      renderCombatientes(); // vuelve a pintar todos y actualiza el resaltado
+    });
 
     listaCombatientesEl.appendChild(div);
   });
 }
+
 
 // Mostrar estado del turno
 function actualizarTurno() {
