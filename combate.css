@@ -109,4 +109,14 @@ button:hover {
   background-color: #e6ffe6;
 }
 
+#valor-modificador {
+  width: 100%;
+  max-width: 300px;
+  font-size: 1.1rem;
+  padding: 0.6rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 
