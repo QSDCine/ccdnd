@@ -34,10 +34,11 @@ function renderCombatientes() {
 if (index === combatienteSeleccionado) div.classList.add("seleccionado");
 
 
-    div.innerHTML = `
-      <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">${c.nombre}</strong><br>
-      PG: ${c.pgActual} / ${c.pgMaximos}
-    `;
+div.innerHTML = `
+  <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">${index + 1}.– ${c.nombre}</strong><br>
+  PG: ${c.pgActual} / ${c.pgMaximos}
+`;
+
 
     div.addEventListener("click", () => {
       combatienteSeleccionado = index;
