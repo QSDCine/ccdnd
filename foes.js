@@ -19,40 +19,40 @@ document.addEventListener("DOMContentLoaded", () => {
     jugadores.forEach((jugador) => {
         let div = document.createElement("div");
         div.innerHTML = `
-            <label>${jugador.nombre} (PG: ${jugador.pgActual} / ${jugador.pgMaximos}):</label>
+            <label>${jugador.nombre} (PG: ${jugador.pgActual ?? jugador.pgMaximos} / ${jugador.pgMaximos}, CA: ${jugador.ca ?? "-"})</label>
             <input type="number" placeholder="Iniciativa" class="iniJugador">
         `;
         camposAliados.appendChild(div);
     });
 });
 
-
 document.getElementById("generarCampos").addEventListener("click", () => {
     let numEnemigos = document.getElementById("numEnemigos").value;
     let camposEnemigos = document.getElementById("camposEnemigos");
 
     if (numEnemigos > 0) {
-        camposEnemigos.innerHTML = ""; // Limpiar en caso de cambios
+        camposEnemigos.innerHTML = "";
         for (let i = 0; i < numEnemigos; i++) {
             let div = document.createElement("div");
             div.innerHTML = `
                 <label>Enemigo ${i + 1}:</label>
                 <input type="text" placeholder="Nombre" class="nombreEnemigo">
                 <input type="number" placeholder="Puntos de golpe" class="pgEnemigo">
+                <input type="number" placeholder="Clase de Armadura" class="caEnemigo">
                 <input type="number" placeholder="Iniciativa" class="iniEnemigo">
             `;
             camposEnemigos.appendChild(div);
         }
-        document.getElementById("continuar").style.display = "block"; // Mostrar botón
+        document.getElementById("continuar").style.display = "block";
     } else {
         alert("Por favor, ingresa un número válido de enemigos.");
     }
 });
 
-
 document.getElementById("continuar").addEventListener("click", () => {
     let nombres = document.querySelectorAll(".nombreEnemigo");
     let puntosGolpe = document.querySelectorAll(".pgEnemigo");
+    let clasesArmadura = document.querySelectorAll(".caEnemigo");
     let iniciativas = document.querySelectorAll(".iniEnemigo");
 
     let enemigos = [];
@@ -60,6 +60,7 @@ document.getElementById("continuar").addEventListener("click", () => {
     nombres.forEach((nombre, index) => {
         let nombreValor = nombre.value.trim();
         let pg = parseInt(puntosGolpe[index].value);
+        let ca = parseInt(clasesArmadura[index].value);
         let ini = parseInt(iniciativas[index].value);
 
         if (nombreValor !== "" && !isNaN(pg) && !isNaN(ini)) {
@@ -67,13 +68,13 @@ document.getElementById("continuar").addEventListener("click", () => {
                 nombre: nombreValor,
                 pgMaximos: pg,
                 pgActual: pg,
+                ca: isNaN(ca) ? null : ca,
                 iniciativa: ini,
                 tipo: "enemigo"
             });
         }
     });
 
-    // Obtener jugadores con iniciativa
     let camposIniciativas = document.querySelectorAll(".iniJugador");
     let jugadores = JSON.parse(localStorage.getItem("jugadores")) || [];
 
@@ -84,11 +85,9 @@ document.getElementById("continuar").addEventListener("click", () => {
         jugador.tipo = "jugador";
     });
 
-    // Combinar y ordenar
     let combatientes = [...jugadores, ...enemigos];
     combatientes.sort((a, b) => b.iniciativa - a.iniciativa);
 
-    // Guardar y continuar
     localStorage.setItem("combatientes", JSON.stringify(combatientes));
     localStorage.setItem("turnoActual", "1");
     localStorage.setItem("indiceActual", "0");
