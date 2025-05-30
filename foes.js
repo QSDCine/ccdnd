@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let div = document.createElement("div");
         div.innerHTML = `
             <label>${jugador.nombre} (PG: ${jugador.pgActual ?? jugador.pgMaximos} / ${jugador.pgMaximos}, CA: ${jugador.ca ?? "-"})</label>
-            <input type="number" placeholder="Iniciativa" class="iniJugador">
+            <input type="number" placeholder="Iniciativa" class="iniJugador" autocomplete="off">
         `;
         camposAliados.appendChild(div);
     });
@@ -36,10 +36,10 @@ document.getElementById("generarCampos").addEventListener("click", () => {
             let div = document.createElement("div");
             div.innerHTML = `
                 <label>Enemigo ${i + 1}:</label>
-                <input type="text" placeholder="Nombre" class="nombreEnemigo">
-                <input type="number" placeholder="Puntos de golpe" class="pgEnemigo">
-                <input type="number" placeholder="Clase de Armadura" class="caEnemigo">
-                <input type="number" placeholder="Iniciativa" class="iniEnemigo">
+                <input type="text" placeholder="Nombre" class="nombreEnemigo" autocomplete="off">
+                <input type="number" placeholder="Puntos de golpe" class="pgEnemigo" autocomplete="off">
+                <input type="number" placeholder="Clase de Armadura" class="caEnemigo" autocomplete="off">
+                <input type="number" placeholder="Iniciativa" class="iniEnemigo" autocomplete="off">
             `;
             camposEnemigos.appendChild(div);
         }
