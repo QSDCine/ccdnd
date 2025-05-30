@@ -36,11 +36,11 @@ document.getElementById("generarCampos").addEventListener("click", () => {
         for (let i = 0; i < numEnemigos; i++) {
             let div = document.createElement("div");
             div.innerHTML = `
-                        <label>Enemigo ${i + 1}:</label>
-                        <input type="text" placeholder="Nombre" class="nombreEnemigo">
-                        <input type="number" placeholder="Puntos de golpe" class="pgEnemigo">
-                        <input type="number" placeholder="Iniciativa" class="iniEnemigo">
-                    `;
+                <label>Enemigo ${i + 1}:</label>
+                <input type="text" placeholder="Nombre" class="nombreEnemigo">
+                <input type="number" placeholder="Puntos de golpe" class="pgEnemigo">
+                <input type="number" placeholder="Iniciativa" class="iniEnemigo">
+            `;
             camposEnemigos.appendChild(div);
         }
         document.getElementById("continuar").style.display = "block"; // Mostrar botón
@@ -48,6 +48,7 @@ document.getElementById("generarCampos").addEventListener("click", () => {
         alert("Por favor, ingresa un número válido de enemigos.");
     }
 });
+
 
 document.getElementById("continuar").addEventListener("click", () => {
     let nombres = document.querySelectorAll(".nombreEnemigo");
@@ -72,7 +73,7 @@ document.getElementById("continuar").addEventListener("click", () => {
         }
     });
 
-    // Obtener jugadores con iniciativa y agregarles campos necesarios
+    // Obtener jugadores con iniciativa
     let camposIniciativas = document.querySelectorAll(".iniJugador");
     let jugadores = JSON.parse(localStorage.getItem("jugadores")) || [];
 
@@ -83,20 +84,14 @@ document.getElementById("continuar").addEventListener("click", () => {
         jugador.tipo = "jugador";
     });
 
-    // Combinar y ordenar combatientes
+    // Combinar y ordenar
     let combatientes = [...jugadores, ...enemigos];
     combatientes.sort((a, b) => b.iniciativa - a.iniciativa);
 
-    // Guardar en localStorage
+    // Guardar y continuar
     localStorage.setItem("combatientes", JSON.stringify(combatientes));
     localStorage.setItem("turnoActual", "1");
     localStorage.setItem("indiceActual", "0");
 
-    // Redirigir
     window.location.href = "combate.html";
-});
-
-
-    localStorage.setItem("enemigos", JSON.stringify(enemigos));
-    window.location.href = "combate.html"; // Ir a la batalla
 });
