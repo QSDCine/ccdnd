@@ -115,7 +115,7 @@ function finalizarCombate() {
       nombre: c.nombre,
       pgMaximos: c.pgMaximos,
       pgActual: c.pgActual,
-      ca: c.ca
+      ca: c.caOriginal !== undefined ? c.caOriginal : c.ca
     }));
 
   localStorage.setItem("jugadores", JSON.stringify(jugadoresActualizados));
