@@ -161,3 +161,28 @@ button:hover {
   background-color: #777;
 }
 
+#modificar-ca {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.fila-ca {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+#valor-ca {
+  width: 4rem;
+  padding: 0.2rem;
+  font-size: 0.9rem;
+}
+
+#boton-cambiar-ca {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
