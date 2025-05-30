@@ -83,7 +83,7 @@ function modificarHP(cantidad) {
   resultadoAccion.textContent = `${c.nombre}: ${tipo} aplicado`;
 
   renderCombatientes();
-combatienteSeleccionado = null;
+
 
 }
 
