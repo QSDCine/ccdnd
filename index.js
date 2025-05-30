@@ -56,3 +56,13 @@ document.getElementById("continuar").addEventListener("click", () => {
         alert("Introduce todos los datos correctamente.");
     }
 });
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").then(() => {
+      console.log("SW registrado correctamente");
+    }).catch((err) => {
+      console.error("Error al registrar el SW:", err);
+    });
+  });
+}
+
