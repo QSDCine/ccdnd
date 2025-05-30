@@ -19,8 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     jugadores.forEach((jugador) => {
         let div = document.createElement("div");
         div.innerHTML = `
-            <label>${jugador.nombre}:</label>
-            <label>PG: ${c.pgActual} / ${c.pgMaximos}</label>
+            <label>${jugador.nombre} (PG: ${jugador.pgActual} / ${jugador.pgMaximos}):</label>
             <input type="number" placeholder="Iniciativa" class="iniJugador">
         `;
         camposAliados.appendChild(div);
