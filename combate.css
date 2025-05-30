@@ -125,4 +125,39 @@ button:hover {
   border-radius: 4px;
 }
 
+/* Contenedor de botones de turno */
+.botones-turno {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Pasar turno (más grande y destacado) */
+#pasar-turno {
+  flex: 2;
+  font-size: 1.2rem;
+  padding: 1rem;
+  background-color: #0077cc;
+  border-radius: 6px;
+}
+
+#pasar-turno:hover {
+  background-color: #005fa3;
+}
+
+/* Finalizar combate (más pequeño y discreto) */
+#finalizar-combate {
+  flex: 1;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+  background-color: #999;
+  border-radius: 6px;
+}
+
+#finalizar-combate:hover {
+  background-color: #777;
+}
 
