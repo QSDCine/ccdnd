@@ -100,6 +100,8 @@ function pasarTurno() {
   localStorage.setItem("indiceActual", indiceActual.toString());
   localStorage.setItem("turnoActual", turnoActual.toString());
 
+  combatienteSeleccionado = null;
+resultadoAccion.textContent = ""; // limpia también el mensaje de acción
   actualizarTurno();
   renderCombatientes();
  }
