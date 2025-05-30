@@ -53,15 +53,49 @@ document.getElementById("continuar").addEventListener("click", () => {
     let nombres = document.querySelectorAll(".nombreEnemigo");
     let puntosGolpe = document.querySelectorAll(".pgEnemigo");
     let iniciativas = document.querySelectorAll(".iniEnemigo");
+
     let enemigos = [];
 
     nombres.forEach((nombre, index) => {
-        enemigos.push({
-            nombre: nombre.value,
-            pgMaximos: puntosGolpe[index].value,
-            iniciativa: iniciativas[index].value
-        });
+        let nombreValor = nombre.value.trim();
+        let pg = parseInt(puntosGolpe[index].value);
+        let ini = parseInt(iniciativas[index].value);
+
+        if (nombreValor !== "" && !isNaN(pg) && !isNaN(ini)) {
+            enemigos.push({
+                nombre: nombreValor,
+                pgMaximos: pg,
+                pgActual: pg,
+                iniciativa: ini,
+                tipo: "enemigo"
+            });
+        }
     });
+
+    // Obtener jugadores con iniciativa y agregarles campos necesarios
+    let camposIniciativas = document.querySelectorAll(".iniJugador");
+    let jugadores = JSON.parse(localStorage.getItem("jugadores")) || [];
+
+    jugadores.forEach((jugador, index) => {
+        let ini = parseInt(camposIniciativas[index].value);
+        jugador.iniciativa = isNaN(ini) ? 0 : ini;
+        jugador.pgActual = jugador.pgActual ?? jugador.pgMaximos;
+        jugador.tipo = "jugador";
+    });
+
+    // Combinar y ordenar combatientes
+    let combatientes = [...jugadores, ...enemigos];
+    combatientes.sort((a, b) => b.iniciativa - a.iniciativa);
+
+    // Guardar en localStorage
+    localStorage.setItem("combatientes", JSON.stringify(combatientes));
+    localStorage.setItem("turnoActual", "1");
+    localStorage.setItem("indiceActual", "0");
+
+    // Redirigir
+    window.location.href = "combate.html";
+});
+
 
     localStorage.setItem("enemigos", JSON.stringify(enemigos));
     window.location.href = "combate.html"; // Ir a la batalla
