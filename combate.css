@@ -55,6 +55,31 @@ button:hover {
   background-color: #555;
 }
 
+#boton-turno-fin {
+  background-color: #0077cc;
+  font-size: 1.2rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+}
+
+#boton-turno-fin:hover {
+  background-color: #005fa3;
+}
+
+#boton-combate-fin {
+  background-color: #999;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+  margin-top: 1rem;
+  align-self: flex-end;
+}
+
+#boton-combate-fin:hover {
+  background-color: #777;
+}
+
+
 #lista-combatientes {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
