@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuaderno de Combate</title>
-    <link rel="stylesheet" href="combate.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuaderno de Combate - Enfrentamiento</title>
+  <link rel="stylesheet" href="combate.css">
 </head>
 <body>
-    <header>
-        <h1>Cuaderno de Combate</h1>
-        <p>Turno actual: <span id="turno">1</span></p>
-        <button id="reiniciar">Reiniciar combate</button>
-    </header>
+  <header>
+    <h1>🛡️ Cuaderno de Combate</h1>
+    <p id="estado-turno">Turno 1 - Turno de <span id="nombre-turno">[Nombre]</span></p>
+    <button id="pasar-turno">Pasar turno</button>
+    <button id="finalizar-combate">Finalizar combate</button>
+  </header>
 
-    <section id="personajes">
-        <h2>Personajes</h2>
-        <ul id="lista-jugadores"></ul>
-    </section>
-
-    <section id="monstruos">
-        <h2>Monstruos</h2>
-        <ul id="lista-monstruos"></ul>
+  <main>
+    <section id="lista-combatientes">
+      <!-- Aquí se generarán los combatientes dinámicamente -->
     </section>
 
     <section id="acciones">
-        <h2>Acciones</h2>
-        <p>Selecciona un personaje para modificar sus puntos de golpe.</p>
-        <input type="number" id="modificarHP" placeholder="Cantidad">
-        <button id="sumarHP">+ HP</button>
-        <button id="restarHP">- HP</button>
-        <p>Daño recibido: <span id="danio">0</span></p>
+      <h2>Acciones sobre el personaje seleccionado</h2>
+      <p>Selecciona un combatiente para aplicar daño o curación.</p>
+      <input type="number" id="valor-modificador" placeholder="Cantidad">
+      <button id="boton-curar">+ Curar</button>
+      <button id="boton-danar">- Dañar</button>
+      <p id="resultado-accion"></p>
     </section>
 
-    <script src="combate.js"></script>
+    <section id="historial">
+      <h2>📜 Historial del combate</h2>
+      <div id="registro"></div>
+    </section>
+  </main>
+
+  <script src="combate.js"></script>
 </body>
 </html>
