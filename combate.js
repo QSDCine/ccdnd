@@ -102,6 +102,7 @@ function pasarTurno() {
 
   actualizarTurno();
   renderCombatientes();
+  let combatienteSeleccionado = null;
 }
 
 // Finalizar combate
