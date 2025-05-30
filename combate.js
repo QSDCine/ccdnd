@@ -40,10 +40,12 @@ div.innerHTML = `
 `;
 
 
-    div.addEventListener("click", () => {
-      combatienteSeleccionado = index;
-      resultadoAccion.textContent = `Seleccionado: ${combatientes[index].nombre}`;
-    });
+  div.addEventListener("click", () => {
+  combatienteSeleccionado = index;
+  resultadoAccion.textContent = `Seleccionado: ${combatientes[index].nombre}`;
+  renderCombatientes(); // vuelve a pintar todos y actualiza el resaltado
+});
+
 
     listaCombatientesEl.appendChild(div);
   });
