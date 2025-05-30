@@ -139,6 +139,26 @@ botonDanar.addEventListener("click", () => {
 pasarTurnoBtn.addEventListener("click", pasarTurno);
 finalizarBtn.addEventListener("click", finalizarCombate);
 
+const valorCaEl = document.getElementById("valor-ca");
+const botonCambiarCa = document.getElementById("boton-cambiar-ca");
+
+botonCambiarCa.addEventListener("click", () => {
+  if (combatienteSeleccionado === null) {
+    resultadoAccion.textContent = "Selecciona un combatiente primero.";
+    return;
+  }
+
+  const nuevaCa = parseInt(valorCaEl.value);
+  if (!isNaN(nuevaCa)) {
+    combatientes[combatienteSeleccionado].ca = nuevaCa;
+    resultadoAccion.textContent = `${combatientes[combatienteSeleccionado].nombre}: CA actualizada a ${nuevaCa}`;
+    renderCombatientes();
+  } else {
+    resultadoAccion.textContent = "Introduce un número válido para la CA.";
+  }
+});
+
+
 // Init
 cargarDatos();
 actualizarTurno();
