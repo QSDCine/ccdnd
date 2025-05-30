@@ -76,10 +76,12 @@ button:hover {
 
 
 .combatiente:hover {
-  background-c
+  background-color: #f0f0f0;
+}
 
-  .combatiente.seleccionado {
+.combatiente.seleccionado {
   outline: 2px solid green;
   background-color: #e6ffe6;
 }
+
 
