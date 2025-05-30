@@ -77,3 +77,9 @@ button:hover {
 
 .combatiente:hover {
   background-c
+
+  .combatiente.seleccionado {
+  outline: 2px solid green;
+  background-color: #e6ffe6;
+}
+
