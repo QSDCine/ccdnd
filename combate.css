@@ -104,6 +104,12 @@ button:hover {
   background-color: #f0f0f0;
 }
 
+.combatiente.activo {
+  outline: 2px solid #3399ff;
+  background-color: #e0f0ff;
+}
+
+
 .combatiente.seleccionado {
   outline: 2px solid green;
   background-color: #e6ffe6;
