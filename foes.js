@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let div = document.createElement("div");
         div.innerHTML = `
             <label>${jugador.nombre}:</label>
+            <label>PG: ${c.pgActual} / ${c.pgMaximos}</label>
             <input type="number" placeholder="Iniciativa" class="iniJugador">
         `;
         camposAliados.appendChild(div);
