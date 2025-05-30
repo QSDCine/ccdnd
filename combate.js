@@ -31,6 +31,8 @@ function renderCombatientes() {
     const div = document.createElement("div");
     div.classList.add("combatiente");
     if (index === indiceActual) div.classList.add("activo");
+if (index === combatienteSeleccionado) div.classList.add("seleccionado");
+
 
     div.innerHTML = `
       <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">${c.nombre}</strong><br>
@@ -80,6 +82,8 @@ function modificarHP(cantidad) {
   resultadoAccion.textContent = `${c.nombre}: ${tipo} aplicado`;
 
   renderCombatientes();
+combatienteSeleccionado = null;
+
 }
 
 // Pasar al siguiente turno
