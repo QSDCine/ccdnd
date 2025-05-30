@@ -21,6 +21,12 @@ function cargarDatos() {
   combatientes = JSON.parse(localStorage.getItem("combatientes")) || [];
   turnoActual = parseInt(localStorage.getItem("turnoActual")) || 1;
   indiceActual = parseInt(localStorage.getItem("indiceActual")) || 0;
+combatientes.forEach(c => {
+  if (c.caOriginal === undefined) {
+    c.caOriginal = c.ca;
+  }
+});
+
 }
 
 // Mostrar lista de combatientes
