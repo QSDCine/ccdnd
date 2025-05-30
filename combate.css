@@ -2,3 +2,17 @@
   outline: 2px solid green;
   background-color: #e6ffe6;
 }
+
+#lista-combatientes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.combatiente {
+  flex: 1 1 45%;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
