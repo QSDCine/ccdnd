@@ -9,10 +9,10 @@ document.getElementById("generarCampos").addEventListener("click", () => {
             let div = document.createElement("div");
             div.innerHTML = `
                 <label>Jugador ${i + 1}:</label>
-                <input type="text" placeholder="Nombre" class="nombreJugador">
-                <input type="number" placeholder="PG máximos" class="pgMaxJugador">
-                <input type="number" placeholder="PG actuales" class="pgActualJugador">
-                <input type="number" placeholder="CA" class="caJugador">
+                <input type="text" placeholder="Nombre" class="nombreJugador" autocomplete="off">
+                <input type="number" placeholder="PG máximos" class="pgMaxJugador" autocomplete="off">
+                <input type="number" placeholder="PG actuales" class="pgActualJugador" autocomplete="off">
+                <input type="number" placeholder="CA" class="caJugador" autocomplete="off">
             `;
             camposJugadores.appendChild(div);
         }
