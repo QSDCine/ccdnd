@@ -114,7 +114,8 @@ function finalizarCombate() {
     .map(c => ({
       nombre: c.nombre,
       pgMaximos: c.pgMaximos,
-      pgActual: c.pgActual
+      pgActual: c.pgActual,
+      ca: c.ca
     }));
 
   localStorage.setItem("jugadores", JSON.stringify(jugadoresActualizados));
