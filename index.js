@@ -43,6 +43,7 @@ document.getElementById("continuar").addEventListener("click", () => {
                 pgMaximos: pgMax,
                 pgActual: pgAct,
                 ca: ca,
+                caOriginal: ca,
                 tipo: "jugador"
             });
         }
