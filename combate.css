@@ -24,11 +24,17 @@ header h1 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
-
 #estado-turno {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0055aa;
+  margin-bottom: 1.5rem;
+  border: 2px solid #0055aa;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background-color: #eaf3ff;
 }
+
 
 button {
   background-color: #333;
