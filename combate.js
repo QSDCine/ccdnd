@@ -48,14 +48,15 @@ if (c.pgActual <= 0) div.classList.add("caido");
 
 div.innerHTML = `
   <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">
-  ${index + 1}.– ${c.nombre}
-  ${c.ventaja ? '🟢V' : ''}
-  ${c.desventaja ? '🔴D' : ''}
-  ${(c.tipo === 'jugador' && c.pgActual === 0) ? `${'✅'.repeat(c.exitosMuerte || 0)}${'❌'.repeat(c.fallosMuerte || 0)}` : ''}
-</strong>
-<br>
+    ${index + 1}.– ${c.nombre}
+    ${c.ventaja ? '🟢V' : ''}
+    ${c.desventaja ? '🔴D' : ''}
+  </strong>
+  <span class="iconos-muerte">${(c.tipo === 'jugador' && c.pgActual === 0) ? `${'✅'.repeat(c.exitosMuerte || 0)}${'❌'.repeat(c.fallosMuerte || 0)}` : ''}</span>
+  <br>
   PG: ${c.pgActual} / ${c.pgMaximos} | CA: ${caMostrada}
 `;
+
 
 
     div.addEventListener("click", () => {
