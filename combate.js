@@ -36,8 +36,10 @@ function renderCombatientes() {
   combatientes.forEach((c, index) => {
     const div = document.createElement("div");
     div.classList.add("combatiente");
-    if (index === indiceActual) div.classList.add("activo");
-    if (index === combatienteSeleccionado) div.classList.add("seleccionado");
+if (index === indiceActual) div.classList.add("activo");
+if (index === combatienteSeleccionado) div.classList.add("seleccionado");
+if (c.pgActual <= 0) div.classList.add("caido");
+
 
     const caMostrada = (c.ca !== undefined && c.ca !== null) ? c.ca : "-";
 
@@ -97,20 +99,31 @@ function modificarHP(cantidad) {
 
 // Pasar al siguiente turno
 function pasarTurno() {
-  indiceActual++;
-  if (indiceActual >= combatientes.length) {
-    indiceActual = 0;
-    turnoActual++;
-  }
+  let intentos = 0;
+  const maxIntentos = combatientes.length;
+
+  do {
+    indiceActual++;
+    if (indiceActual >= combatientes.length) {
+      indiceActual = 0;
+      turnoActual++;
+    }
+
+    const actual = combatientes[indiceActual];
+    if (actual.pgActual > 0 || actual.tipo === "jugador") break;
+
+    intentos++;
+  } while (intentos < maxIntentos);
 
   localStorage.setItem("indiceActual", indiceActual.toString());
   localStorage.setItem("turnoActual", turnoActual.toString());
 
   combatienteSeleccionado = null;
-resultadoAccion.textContent = ""; // limpia también el mensaje de acción
+  resultadoAccion.textContent = "";
   actualizarTurno();
   renderCombatientes();
- }
+}
+
 
 // Finalizar combate
 function finalizarCombate() {
