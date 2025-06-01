@@ -186,3 +186,8 @@ button:hover {
   font-size: 0.85rem;
   cursor: pointer;
 }
+
+.combatiente.caido {
+  background-color: #440000;
+  color: #fff;
+}
