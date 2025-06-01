@@ -250,30 +250,33 @@ function actualizarEstadoMuerte(combatiente) {
   combatiente.exitosMuerte = combatiente.exitosMuerte || 0;
   combatiente.fallosMuerte = combatiente.fallosMuerte || 0;
 
-
   if (combatiente.fallosMuerte >= 3 && !combatiente.muerto) {
     combatiente.muerto = true;
     registrar(`${combatiente.nombre} ha muerto.`);
     controlesMuerte.classList.remove("mostrar-muerte");
+    combatiente.exitosMuerte = 0;
+    combatiente.fallosMuerte = 3;
   }
-
 
   else if (combatiente.exitosMuerte >= 3 && !combatiente.muerto) {
     combatiente.pgActual = 1;
+    combatiente.muerto = false;
     registrar(`${combatiente.nombre} se estabiliza.`);
     controlesMuerte.classList.remove("mostrar-muerte");
+    combatiente.exitosMuerte = 0;
+    combatiente.fallosMuerte = 0;
   }
 
   renderCombatientes();
-
 }
+
 
 
 botonExito.addEventListener("click", () => {
   if (combatienteSeleccionado === null) return;
 
   const c = combatientes[combatienteSeleccionado];
-  if (c.pgActual > 0 || c.tipo !== "jugador") return;
+  if (c.pgActual > 0 || c.tipo !== "jugador" || c.muerto) return;
 
   c.exitosMuerte++;
   actualizarEstadoMuerte(c);
@@ -283,7 +286,7 @@ botonFallo.addEventListener("click", () => {
   if (combatienteSeleccionado === null) return;
 
   const c = combatientes[combatienteSeleccionado];
-  if (c.pgActual > 0 || c.tipo !== "jugador") return;
+  if (c.pgActual > 0 || c.tipo !== "jugador" || c.muerto) return;
 
   c.fallosMuerte++;
   actualizarEstadoMuerte(c);
