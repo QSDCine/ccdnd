@@ -43,7 +43,7 @@ if (c.pgActual <= 0) div.classList.add("caido");
     const caMostrada = (c.ca !== undefined && c.ca !== null) ? c.ca : "-";
 
     div.innerHTML = `
-      <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">${index + 1}.– ${c.nombre}</strong><br>
+   <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">${index + 1}.– ${c.nombre} ${c.ventaja ? '🟢V' : ''}${c.desventaja ? '🔴D' : ''}</strong><br>
       PG: ${c.pgActual} / ${c.pgMaximos} | CA: ${caMostrada}
     `;
 
