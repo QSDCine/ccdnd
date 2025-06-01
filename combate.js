@@ -22,11 +22,10 @@ function cargarDatos() {
   turnoActual = parseInt(localStorage.getItem("turnoActual")) || 1;
   indiceActual = parseInt(localStorage.getItem("indiceActual")) || 0;
 combatientes.forEach(c => {
-  if (c.caOriginal === undefined) {
-    c.caOriginal = c.ca;
-  }
+  if (c.caOriginal === undefined) c.caOriginal = c.ca;
+  if (c.ventaja === undefined) c.ventaja = false;
+  if (c.desventaja === undefined) c.desventaja = false;
 });
-
 }
 
 // Mostrar lista de combatientes
