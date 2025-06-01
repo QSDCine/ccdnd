@@ -42,10 +42,17 @@ if (c.pgActual <= 0) div.classList.add("caido");
 
     const caMostrada = (c.ca !== undefined && c.ca !== null) ? c.ca : "-";
 
-    div.innerHTML = `
-   <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">${index + 1}.– ${c.nombre} ${c.ventaja ? '🟢V' : ''}${c.desventaja ? '🔴D' : ''}</strong><br>
-      PG: ${c.pgActual} / ${c.pgMaximos} | CA: ${caMostrada}
-    `;
+   const muerteIconos = c.pgActual === 0 && c.tipo === "jugador"
+  ? " " + "✅".repeat(c.exitosMuerte || 0) + "❌".repeat(c.fallosMuerte || 0)
+  : "";
+
+div.innerHTML = `
+  <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">
+    ${index + 1}.– ${c.nombre}${muerteIconos} ${c.ventaja ? '🟢V' : ''}${c.desventaja ? '🔴D' : ''}
+  </strong><br>
+  PG: ${c.pgActual} / ${c.pgMaximos} | CA: ${caMostrada}
+`;
+
 
     div.addEventListener("click", () => {
       combatienteSeleccionado = index;
