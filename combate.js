@@ -257,7 +257,9 @@ function actualizarEstadoMuerte(combatiente) {
     combatiente.fallosMuerte = 3;
   }
 
-  renderCombatientes(); 
+  renderCombatientes();
+combatienteSeleccionado = combatientes.findIndex(c => c.nombre === combatiente.nombre);
+ 
 }
 
 
