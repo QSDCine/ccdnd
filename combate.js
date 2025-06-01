@@ -203,6 +203,63 @@ botonVentajaDesventaja.addEventListener("click", () => {
   renderCombatientes();
 });
 
+const botonExito = document.getElementById("boton-exito");
+const botonFallo = document.getElementById("boton-fallo");
+const estadoMuerteEl = document.getElementById("estado-muerte");
+const controlesMuerte = document.getElementById("muerte-controls");
+if (index === combatienteSeleccionado && c.tipo === "jugador") {
+  if (c.pgActual === 0) {
+    controlesMuerte.style.display = "block";
+
+    if (!c.exitosMuerte) c.exitosMuerte = 0;
+    if (!c.fallosMuerte) c.fallosMuerte = 0;
+
+    actualizarEstadoMuerte(c);
+  } else {
+    controlesMuerte.style.display = "none";
+  }
+}
+function actualizarEstadoMuerte(combatiente) {
+  const ex = "✅".repeat(combatiente.exitosMuerte);
+  const fa = "❌".repeat(combatiente.fallosMuerte);
+  estadoMuerteEl.textContent = `Tiradas de Muerte: ${ex} ${fa}`;
+
+  if (combatiente.exitosMuerte >= 3) {
+    registrar(`${combatiente.nombre} se estabiliza.`);
+    combatiente.pgActual = 1;
+    combatiente.exitosMuerte = 0;
+    combatiente.fallosMuerte = 0;
+    controlesMuerte.style.display = "none";
+    renderCombatientes();
+  } else if (combatiente.fallosMuerte >= 3) {
+    registrar(`${combatiente.nombre} ha muerto.`);
+    controlesMuerte.style.display = "none";
+    renderCombatientes();
+  }
+}
+
+botonExito.addEventListener("click", () => {
+  if (combatienteSeleccionado === null) return;
+
+  const c = combatientes[combatienteSeleccionado];
+  if (c.pgActual > 0 || c.tipo !== "jugador") return;
+
+  c.exitosMuerte = (c.exitosMuerte || 0) + 1;
+  actualizarEstadoMuerte(c);
+});
+
+botonFallo.addEventListener("click", () => {
+  if (combatienteSeleccionado === null) return;
+
+  const c = combatientes[combatienteSeleccionado];
+  if (c.pgActual > 0 || c.tipo !== "jugador") return;
+
+  c.fallosMuerte = (c.fallosMuerte || 0) + 1;
+  actualizarEstadoMuerte(c);
+});
+
+
+
 
 
 
