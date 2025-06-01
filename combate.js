@@ -54,6 +54,18 @@ if (c.pgActual <= 0) div.classList.add("caido");
     });
 
     listaCombatientesEl.appendChild(div);
+    if (index === combatienteSeleccionado && c.tipo === "jugador") {
+  if (c.pgActual === 0) {
+    controlesMuerte.style.display = "block";
+
+    if (!c.exitosMuerte) c.exitosMuerte = 0;
+    if (!c.fallosMuerte) c.fallosMuerte = 0;
+
+    actualizarEstadoMuerte(c);
+  } else {
+    controlesMuerte.style.display = "none";
+  }
+}
   });
 }
 
@@ -207,18 +219,7 @@ const botonExito = document.getElementById("boton-exito");
 const botonFallo = document.getElementById("boton-fallo");
 const estadoMuerteEl = document.getElementById("estado-muerte");
 const controlesMuerte = document.getElementById("muerte-controls");
-if (index === combatienteSeleccionado && c.tipo === "jugador") {
-  if (c.pgActual === 0) {
-    controlesMuerte.style.display = "block";
 
-    if (!c.exitosMuerte) c.exitosMuerte = 0;
-    if (!c.fallosMuerte) c.fallosMuerte = 0;
-
-    actualizarEstadoMuerte(c);
-  } else {
-    controlesMuerte.style.display = "none";
-  }
-}
 function actualizarEstadoMuerte(combatiente) {
   const ex = "✅".repeat(combatiente.exitosMuerte);
   const fa = "❌".repeat(combatiente.fallosMuerte);
