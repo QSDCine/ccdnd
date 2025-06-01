@@ -70,9 +70,10 @@ div.innerHTML = `
     });
 
     listaCombatientesEl.appendChild(div);
-    if (index === combatienteSeleccionado && c.tipo === "jugador") {
+if (index === combatienteSeleccionado && c.tipo === "jugador" && !c.muerto) {
   if (c.pgActual === 0) {
     controlesMuerte.classList.add("mostrar-muerte");
+
 
 
     if (!c.exitosMuerte) c.exitosMuerte = 0;
@@ -153,7 +154,8 @@ function pasarTurno() {
     }
 
     const actual = combatientes[indiceActual];
-    if (actual.pgActual > 0 || actual.tipo === "jugador") break;
+    if (!actual.muerto && (actual.pgActual > 0 || actual.tipo === "jugador")) break;
+
 
     intentos++;
   } while (intentos < maxIntentos);
