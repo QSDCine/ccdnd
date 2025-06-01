@@ -235,9 +235,13 @@ const estadoMuerteEl = document.getElementById("estado-muerte");
 const controlesMuerte = document.getElementById("muerte-controls");
 
 function actualizarEstadoMuerte(combatiente) {
+combatiente.exitosMuerte = combatiente.exitosMuerte || 0;
+combatiente.fallosMuerte = combatiente.fallosMuerte || 0;
   const ex = "✅".repeat(combatiente.exitosMuerte);
   const fa = "❌".repeat(combatiente.fallosMuerte);
-  estadoMuerteEl.textContent = `Tiradas de Muerte: ${ex} ${fa}`;
+    estadoMuerteEl.textContent = `Tiradas de Muerte: ${ex} ${fa}`;
+
+
 
 if (combatiente.exitosMuerte >= 3 && !combatiente.muerto) {
   registrar(`${combatiente.nombre} se estabiliza.`);
@@ -251,6 +255,9 @@ if (combatiente.exitosMuerte >= 3 && !combatiente.muerto) {
   registrar(`${combatiente.nombre} ha muerto.`);
   combatiente.muerto = true;
   controlesMuerte.style.display = "none";
+  combatiente.exitosMuerte = 0;
+combatiente.fallosMuerte = 3; 
+
   renderCombatientes();
 }
 }
@@ -263,7 +270,6 @@ botonExito.addEventListener("click", () => {
 
   c.exitosMuerte = (c.exitosMuerte || 0) + 1;
   actualizarEstadoMuerte(c);
-  renderCombatientes(); 
 });
 
 botonFallo.addEventListener("click", () => {
@@ -274,7 +280,6 @@ botonFallo.addEventListener("click", () => {
 
   c.fallosMuerte = (c.fallosMuerte || 0) + 1;
   actualizarEstadoMuerte(c);
-  renderCombatientes(); 
 });
 
 
