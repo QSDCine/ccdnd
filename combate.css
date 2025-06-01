@@ -192,10 +192,15 @@ button:hover {
   color: #fff;
 }
 
+
 #muerte-controls {
-  margin-top: 1rem;
-  display: none; /* Se mostrará solo si el personaje seleccionado tiene 0 PG */
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+   display: none; /* Se mostrará solo si el personaje seleccionado tiene 0 PG */
 }
+
 
 .botones-muerte {
   display: flex;
