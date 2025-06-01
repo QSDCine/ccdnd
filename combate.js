@@ -49,9 +49,10 @@ if (c.pgActual <= 0) div.classList.add("caido");
 div.innerHTML = `
   <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">
     ${index + 1}.– ${c.nombre}
+  ${c.muerto ? '💀' : ''}
     ${c.ventaja ? '🟢V' : ''}
     ${c.desventaja ? '🔴D' : ''}
-  </strong>
+      </strong>
   <span class="iconos-muerte">${(c.tipo === 'jugador' && c.pgActual === 0) ? `${'✅'.repeat(c.exitosMuerte || 0)}${'❌'.repeat(c.fallosMuerte || 0)}` : ''}</span>
   <br>
   PG: ${c.pgActual} / ${c.pgMaximos} | CA: ${caMostrada}
@@ -238,18 +239,20 @@ function actualizarEstadoMuerte(combatiente) {
   const fa = "❌".repeat(combatiente.fallosMuerte);
   estadoMuerteEl.textContent = `Tiradas de Muerte: ${ex} ${fa}`;
 
-  if (combatiente.exitosMuerte >= 3) {
-    registrar(`${combatiente.nombre} se estabiliza.`);
-    combatiente.pgActual = 1;
-    combatiente.exitosMuerte = 0;
-    combatiente.fallosMuerte = 0;
-    controlesMuerte.classList.remove("mostrar-muerte");
-    renderCombatientes();
-  } else if (combatiente.fallosMuerte >= 3) {
-    registrar(`${combatiente.nombre} ha muerto.`);
-    controlesMuerte.classList.remove("mostrar-muerte");
-    renderCombatientes();
-  }
+if (combatiente.exitosMuerte >= 3 && !combatiente.muerto) {
+  registrar(`${combatiente.nombre} se estabiliza.`);
+  combatiente.pgActual = 1;
+  combatiente.exitosMuerte = 0;
+  combatiente.fallosMuerte = 0;
+  combatiente.muerto = false;
+  controlesMuerte.style.display = "none";
+  renderCombatientes();
+} else if (combatiente.fallosMuerte >= 3 && !combatiente.muerto) {
+  registrar(`${combatiente.nombre} ha muerto.`);
+  combatiente.muerto = true;
+  controlesMuerte.style.display = "none";
+  renderCombatientes();
+}
 }
 
 botonExito.addEventListener("click", () => {
