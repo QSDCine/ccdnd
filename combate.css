@@ -181,7 +181,7 @@ button:hover {
   font-size: 0.9rem;
 }
 
-#boton-cambiar-ca {
+#boton-cambiar-ca, #boton-ventaja-desventaja {
   padding: 0.2rem 0.5rem;
   font-size: 0.85rem;
   cursor: pointer;
@@ -191,3 +191,21 @@ button:hover {
   background-color: #ff8fa3;
   color: #fff;
 }
+
+#muerte-controls {
+  margin-top: 1rem;
+  display: none; /* Se mostrará solo si el personaje seleccionado tiene 0 PG */
+}
+
+.botones-muerte {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#boton-exito,
+#boton-fallo {
+  padding: 0.25rem 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
