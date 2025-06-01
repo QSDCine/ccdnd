@@ -193,12 +193,16 @@ button:hover {
 }
 
 #muerte-controls {
-  display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   margin-top: 1rem;
-  display: none;
+  display: none; 
 }
+
+.mostrar-muerte {
+  display: flex !important; 
+}
+
 
 #muerte-controls .botones-muerte {
   display: flex;
