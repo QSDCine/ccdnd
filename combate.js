@@ -260,6 +260,7 @@ botonExito.addEventListener("click", () => {
 
   c.exitosMuerte = (c.exitosMuerte || 0) + 1;
   actualizarEstadoMuerte(c);
+  renderCombatientes(); 
 });
 
 botonFallo.addEventListener("click", () => {
@@ -270,11 +271,8 @@ botonFallo.addEventListener("click", () => {
 
   c.fallosMuerte = (c.fallosMuerte || 0) + 1;
   actualizarEstadoMuerte(c);
+  renderCombatientes(); 
 });
-
-
-
-
 
 
 // Init
