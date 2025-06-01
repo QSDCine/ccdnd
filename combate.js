@@ -116,22 +116,29 @@ function modificarHP(cantidad) {
   if (c.pgActual > c.pgMaximos) c.pgActual = c.pgMaximos;
   if (c.pgActual < 0) c.pgActual = 0;
 
+  // Si estaba muerto y ahora tiene más de 0 PG, lo revivimos
+  if (c.muerto && c.pgActual > 0) {
+    c.muerto = false;
+    c.exitosMuerte = 0;
+    c.fallosMuerte = 0;
+    registrar(`${c.nombre} ha sido resucitado y vuelve al combate.`);
+  }
+
   const tipo = cantidad > 0 ? "cura" : "daño";
   registrar(`Turno ${turnoActual} - ${c.nombre} recibe ${Math.abs(cantidad)} de ${tipo} (${anterior} ➞ ${c.pgActual})`);
   resultadoAccion.textContent = `${c.nombre}: ${tipo} aplicado`;
 
- if (c.pgActual === 0 && c.tipo === "jugador") {
-  controlesMuerte.classList.add("mostrar-muerte");
-  actualizarEstadoMuerte(c);
-} else {
-  controlesMuerte.classList.remove("mostrar-muerte");
+  if (c.pgActual === 0 && c.tipo === "jugador") {
+    controlesMuerte.classList.add("mostrar-muerte");
+    actualizarEstadoMuerte(c);
+  } else {
+    controlesMuerte.classList.remove("mostrar-muerte");
+  }
+
+  renderCombatientes();
+  combatienteSeleccionado = combatientes.findIndex(x => x === c);
 }
-renderCombatientes();
-combatienteSeleccionado = combatientes.findIndex(x => x === c);
 
-
-
-}
 
 // Pasar al siguiente turno
 function pasarTurno() {
