@@ -67,14 +67,15 @@ div.innerHTML = `
     listaCombatientesEl.appendChild(div);
     if (index === combatienteSeleccionado && c.tipo === "jugador") {
   if (c.pgActual === 0) {
-    controlesMuerte.style.display = "block";
+    controlesMuerte.classList.add("mostrar-muerte");
+
 
     if (!c.exitosMuerte) c.exitosMuerte = 0;
     if (!c.fallosMuerte) c.fallosMuerte = 0;
 
     actualizarEstadoMuerte(c);
   } else {
-    controlesMuerte.style.display = "none";
+    controlesMuerte.classList.remove("mostrar-muerte");
   }
 }
   });
@@ -241,11 +242,11 @@ function actualizarEstadoMuerte(combatiente) {
     combatiente.pgActual = 1;
     combatiente.exitosMuerte = 0;
     combatiente.fallosMuerte = 0;
-    controlesMuerte.style.display = "none";
+    controlesMuerte.classList.remove("mostrar-muerte");
     renderCombatientes();
   } else if (combatiente.fallosMuerte >= 3) {
     registrar(`${combatiente.nombre} ha muerto.`);
-    controlesMuerte.style.display = "none";
+    controlesMuerte.classList.remove("mostrar-muerte");
     renderCombatientes();
   }
 }
