@@ -178,36 +178,31 @@ botonCambiarCa.addEventListener("click", () => {
   }
 });
 // BOTON VENTAJA/DESVENTAJA
-const botonVentaja = document.getElementById("boton-ventaja");
-const botonDesventaja = document.getElementById("boton-desventaja");
+const botonVentajaDesventaja = document.getElementById("boton-ventaja-desventaja");
 
-botonVentaja.addEventListener("click", () => {
+botonVentajaDesventaja.addEventListener("click", () => {
   if (combatienteSeleccionado === null) {
     resultadoAccion.textContent = "Selecciona un combatiente primero.";
     return;
   }
 
   const c = combatientes[combatienteSeleccionado];
-  c.ventaja = !c.ventaja;
-  if (c.ventaja) c.desventaja = false; // No pueden tener ambas
 
-  resultadoAccion.textContent = `${c.nombre}: Ventaja ${c.ventaja ? 'activada' : 'desactivada'}`;
-  renderCombatientes();
-});
-
-botonDesventaja.addEventListener("click", () => {
-  if (combatienteSeleccionado === null) {
-    resultadoAccion.textContent = "Selecciona un combatiente primero.";
-    return;
+  if (!c.ventaja && !c.desventaja) {
+    c.ventaja = true;
+    resultadoAccion.textContent = `${c.nombre}: Ventaja activada`;
+  } else if (c.ventaja) {
+    c.ventaja = false;
+    c.desventaja = true;
+    resultadoAccion.textContent = `${c.nombre}: Desventaja activada`;
+  } else {
+    c.desventaja = false;
+    resultadoAccion.textContent = `${c.nombre}: Sin ventaja ni desventaja`;
   }
 
-  const c = combatientes[combatienteSeleccionado];
-  c.desventaja = !c.desventaja;
-  if (c.desventaja) c.ventaja = false; // No pueden tener ambas
-
-  resultadoAccion.textContent = `${c.nombre}: Desventaja ${c.desventaja ? 'activada' : 'desactivada'}`;
   renderCombatientes();
 });
+
 
 
 
