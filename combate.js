@@ -78,7 +78,7 @@ div.innerHTML = `
     if (!c.exitosMuerte) c.exitosMuerte = 0;
     if (!c.fallosMuerte) c.fallosMuerte = 0;
 
-    actualizarEstadoMuerte(c);
+
   } else {
     controlesMuerte.classList.remove("mostrar-muerte");
   }
