@@ -25,6 +25,9 @@ combatientes.forEach(c => {
   if (c.caOriginal === undefined) c.caOriginal = c.ca;
   if (c.ventaja === undefined) c.ventaja = false;
   if (c.desventaja === undefined) c.desventaja = false;
+  if (c.exitosMuerte === undefined) c.exitosMuerte = 0;
+    if (c.fallosMuerte === undefined) c.fallosMuerte = 0;
+    if (c.muerto === undefined) c.muerto = false;
 });
 }
 
@@ -63,7 +66,7 @@ div.innerHTML = `
     div.addEventListener("click", () => {
       combatienteSeleccionado = index;
       resultadoAccion.textContent = `Seleccionado: ${combatientes[index].nombre}`;
-      renderCombatientes(); // vuelve a pintar todos y actualiza el resaltado
+      renderCombatientes(); 
     });
 
     listaCombatientesEl.appendChild(div);
@@ -235,31 +238,26 @@ const estadoMuerteEl = document.getElementById("estado-muerte");
 const controlesMuerte = document.getElementById("muerte-controls");
 
 function actualizarEstadoMuerte(combatiente) {
+
   combatiente.exitosMuerte = combatiente.exitosMuerte || 0;
   combatiente.fallosMuerte = combatiente.fallosMuerte || 0;
 
-  const ex = "✅".repeat(combatiente.exitosMuerte);
-  const fa = "❌".repeat(combatiente.fallosMuerte);
-  estadoMuerteEl.textContent = `Tiradas de Muerte: ${ex} ${fa}`;
 
-  if (combatiente.exitosMuerte >= 3 && !combatiente.muerto) {
-    registrar(`${combatiente.nombre} se estabiliza.`);
-    combatiente.pgActual = 1;
-    combatiente.exitosMuerte = 0;
-    combatiente.fallosMuerte = 0;
-    combatiente.muerto = false;
-    controlesMuerte.style.display = "none";
-  } else if (combatiente.fallosMuerte >= 3 && !combatiente.muerto) {
-    registrar(`${combatiente.nombre} ha muerto.`);
+  if (combatiente.fallosMuerte >= 3 && !combatiente.muerto) {
     combatiente.muerto = true;
-    controlesMuerte.style.display = "none";
-    combatiente.exitosMuerte = 0;
-    combatiente.fallosMuerte = 3;
+    registrar(`${combatiente.nombre} ha muerto.`);
+    controlesMuerte.classList.remove("mostrar-muerte");
+  }
+
+
+  else if (combatiente.exitosMuerte >= 3 && !combatiente.muerto) {
+    combatiente.pgActual = 1;
+    registrar(`${combatiente.nombre} se estabiliza.`);
+    controlesMuerte.classList.remove("mostrar-muerte");
   }
 
   renderCombatientes();
-combatienteSeleccionado = combatientes.findIndex(c => c.nombre === combatiente.nombre);
- 
+  combatienteSeleccionado = combatientes.findIndex(x => x === combatiente);
 }
 
 
@@ -269,7 +267,7 @@ botonExito.addEventListener("click", () => {
   const c = combatientes[combatienteSeleccionado];
   if (c.pgActual > 0 || c.tipo !== "jugador") return;
 
-  c.exitosMuerte = (c.exitosMuerte || 0) + 1;
+  c.exitosMuerte++;
   actualizarEstadoMuerte(c);
 });
 
@@ -279,7 +277,7 @@ botonFallo.addEventListener("click", () => {
   const c = combatientes[combatienteSeleccionado];
   if (c.pgActual > 0 || c.tipo !== "jugador") return;
 
-  c.fallosMuerte = (c.fallosMuerte || 0) + 1;
+  c.fallosMuerte++;
   actualizarEstadoMuerte(c);
 });
 
