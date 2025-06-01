@@ -177,6 +177,38 @@ botonCambiarCa.addEventListener("click", () => {
     resultadoAccion.textContent = "Introduce un número válido para la CA.";
   }
 });
+// BOTON VENTAJA/DESVENTAJA
+const botonVentaja = document.getElementById("boton-ventaja");
+const botonDesventaja = document.getElementById("boton-desventaja");
+
+botonVentaja.addEventListener("click", () => {
+  if (combatienteSeleccionado === null) {
+    resultadoAccion.textContent = "Selecciona un combatiente primero.";
+    return;
+  }
+
+  const c = combatientes[combatienteSeleccionado];
+  c.ventaja = !c.ventaja;
+  if (c.ventaja) c.desventaja = false; // No pueden tener ambas
+
+  resultadoAccion.textContent = `${c.nombre}: Ventaja ${c.ventaja ? 'activada' : 'desactivada'}`;
+  renderCombatientes();
+});
+
+botonDesventaja.addEventListener("click", () => {
+  if (combatienteSeleccionado === null) {
+    resultadoAccion.textContent = "Selecciona un combatiente primero.";
+    return;
+  }
+
+  const c = combatientes[combatienteSeleccionado];
+  c.desventaja = !c.desventaja;
+  if (c.desventaja) c.ventaja = false; // No pueden tener ambas
+
+  resultadoAccion.textContent = `${c.nombre}: Desventaja ${c.desventaja ? 'activada' : 'desactivada'}`;
+  renderCombatientes();
+});
+
 
 
 // Init
