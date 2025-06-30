@@ -28,6 +28,7 @@ combatientes.forEach(c => {
   if (c.exitosMuerte === undefined) c.exitosMuerte = 0;
     if (c.fallosMuerte === undefined) c.fallosMuerte = 0;
     if (c.muerto === undefined) c.muerto = false;
+if (c.estadoAlterado === undefined) c.estadoAlterado = null;
 });
 }
 
@@ -49,6 +50,9 @@ if (c.pgActual <= 0) div.classList.add("caido");
   ? " " + "✅".repeat(c.exitosMuerte || 0) + "❌".repeat(c.fallosMuerte || 0)
   : "";
 
+const estadoTexto = c.estadoAlterado ? `⚠️ ${c.estadoAlterado.nombre} (${c.estadoAlterado.turnos})` : '';
+
+
 div.innerHTML = `
   <strong style="color:${c.tipo === 'enemigo' ? 'darkblue' : 'black'}">
     ${index + 1}.– ${c.nombre}
@@ -58,7 +62,8 @@ div.innerHTML = `
       </strong>
   <span class="iconos-muerte">${(c.tipo === 'jugador' && c.pgActual === 0) ? `${'✅'.repeat(c.exitosMuerte || 0)}${'❌'.repeat(c.fallosMuerte || 0)}` : ''}</span>
   <br>
-  PG: ${c.pgActual} / ${c.pgMaximos} | CA: ${caMostrada}
+  PG: ${c.pgActual} / ${c.pgMaximos} | CA: ${caMostrada} ${estadoTexto ? `| ${estadoTexto}` : ''}
+
 `;
 
 
@@ -154,6 +159,13 @@ function pasarTurno() {
     }
 
     const actual = combatientes[indiceActual];
+if (actual.estadoAlterado) {
+  actual.estadoAlterado.turnos--;
+  if (actual.estadoAlterado.turnos <= 0) {
+    registrar(`${actual.nombre} ya no está bajo el efecto de "${actual.estadoAlterado.nombre}".`);
+    actual.estadoAlterado = null;
+  }
+}
     if (!actual.muerto && (actual.pgActual > 0 || actual.tipo === "jugador")) break;
 
 
@@ -300,6 +312,55 @@ botonFallo.addEventListener("click", () => {
   c.fallosMuerte++;
   actualizarEstadoMuerte(c);
 });
+
+// Estados alterados:
+
+const botonEstado = document.getElementById("boton-estado");
+const botonQuitarEstado = document.getElementById("boton-quitar-estado");
+const inputNombreEstado = document.getElementById("nombre-estado");
+const inputTurnosEstado = document.getElementById("turnos-estado");
+
+botonEstado.addEventListener("click", () => {
+  if (combatienteSeleccionado === null) {
+    resultadoAccion.textContent = "Selecciona un combatiente primero.";
+    return;
+  }
+
+  const nombre = inputNombreEstado.value.trim();
+  const turnos = parseInt(inputTurnosEstado.value);
+
+  if (!nombre || isNaN(turnos) || turnos <= 0) {
+    resultadoAccion.textContent = "Introduce un nombre y duración válida.";
+    return;
+  }
+
+  const c = combatientes[combatienteSeleccionado];
+  c.estadoAlterado = { nombre, turnos };
+  registrar(`${c.nombre} está ahora bajo el efecto de "${nombre}" durante ${turnos} turnos.`);
+
+  inputNombreEstado.value = "";
+  inputTurnosEstado.value = "";
+  renderCombatientes();
+});
+
+botonQuitarEstado.addEventListener("click", () => {
+  if (combatienteSeleccionado === null) {
+    resultadoAccion.textContent = "Selecciona un combatiente primero.";
+    return;
+  }
+
+  const c = combatientes[combatienteSeleccionado];
+
+  if (!c.estadoAlterado) {
+    resultadoAccion.textContent = `${c.nombre} no tiene estado alterado.`;
+    return;
+  }
+
+  registrar(`${c.nombre} ya no está bajo el efecto de "${c.estadoAlterado.nombre}".`);
+  c.estadoAlterado = null;
+  renderCombatientes();
+});
+
 
 
 // Init
